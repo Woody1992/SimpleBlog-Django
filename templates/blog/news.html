@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}
+Esports and gaming news - the latest online computer games news, articles, reviews, interviews with players
+{% endblock %}
+
+{% block hero %}
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-12" style="padding-top: 50px;">
+        <div class="col-md-9">
+            <h1 style="color: #FFFFFF; text-align: center;">News</h1>
+        </div>
+    </div>
+    <div class="col-lg-9 blog-posts" style="padding-top: 30px;">
+        <div class="row">
+            {% for post in posts %}
+            <div class="col-md-4">
+                <div class="blog-post">
+                    <img src="{{ post.image.url }}" alt="">
+                    <div class="content-box">
+                        <div><div class="post-date">{{ post.created_at|naturaltime}}</div>
+                            <h5><a href="{{post.get_absolute_url}}" class="title-link">{{ post.title }}</a></h5>
+                        </div>
+                        <div class="post-metas">
+                            <div class="post-meta">By {{post.author}}</div>
+                            <div class="post-meta">in <a href="{{post.category.get_absolute_url}}">{{post.category}}</a></div>
+                            <div class="post-meta">3 Comments</div>
+                        </div>
+                    </div>
+                    <!--<p>{{ post.content|slice:":250" }}...</p>-->
+                    <!--<a href="{{post.get_absolute_url }}" class="read-more">Read More</a>-->
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="pagination" style="margin:0 auto;">
+            <a href="#">&laquo;</a>
+            <a href="#">1</a>
+            <a class="active" href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">6</a>
+            <a href="#">&raquo;</a>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block sidebar %}
+    <div class="col-lg-3 sidebar" style="padding-top: 30px;">
+        <div class="sb-widget">
+            <h2 class="sb-title">Categories</h2>
+            <ul class="sb-cata-list">
+                {% for game in categories %}
+                <li><a href="{{ game.get_absolute_url }}">{{game.name}}<img src="{{game.icon.url}}"></a></li> <!-- ICONS!!!! <a href="{{game.website}}" target="_blank">{{ game.name }}</a>  -->
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="sb-widget">
+            <h2 class="sb-title">Top 5 news this weak</h2>
+            <div class="latest-news-widget">
+                <div class="ln-item">
+                    <img src="{% static 'img/blog-thumbs/1.jpg' %}" alt="">
+                    <div class="ln-text">
+                        <div class="ln-date">April 1, 2019</div>
+                        <h6>10 Amazing new games</h6>
+                        <div class="ln-metas">
+                            <div class="ln-meta">By Admin</div>
+                            <div class="ln-meta">in <a href="#">Games</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ln-item">
+                    <img src="{% static 'img/blog-thumbs/2.jpg' %}" alt="">
+                    <div class="ln-text">
+                        <div class="ln-date">April 1, 2019</div>
+                        <h6>10 Amazing new games</h6>
+                        <div class="ln-metas">
+                            <div class="ln-meta">By Admin</div>
+                            <div class="ln-meta">in <a href="#">Games</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ln-item">
+                    <img src="{% static 'img/blog-thumbs/3.jpg' %}" alt="">
+                    <div class="ln-text">
+                        <div class="ln-date">April 1, 2019</div>
+                        <h6>10 Amazing new games</h6>
+                        <div class="ln-metas">
+                            <div class="ln-meta">By Admin</div>
+                            <div class="ln-meta">in <a href="#">Games</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ln-item">
+                    <img src="{% static 'img/blog-thumbs/3.jpg' %}" alt="">
+                    <div class="ln-text">
+                        <div class="ln-date">April 1, 2019</div>
+                        <h6>10 Amazing new games</h6>
+                        <div class="ln-metas">
+                            <div class="ln-meta">By Admin</div>
+                            <div class="ln-meta">in <a href="#">Games</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ln-item">
+                    <img src="{% static 'img/blog-thumbs/4.jpg' %}" alt="">
+                    <div class="ln-text">
+                        <div class="ln-date">April 1, 2019</div>
+                        <h6>10 Amazing new games</h6>
+                        <div class="ln-metas">
+                            <div class="ln-meta">By Admin</div>
+                            <div class="ln-meta">in <a href="#">Games</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block content_after %}
+{% endblock %}

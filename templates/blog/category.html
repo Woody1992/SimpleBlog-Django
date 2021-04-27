@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}
+{{ category.name }}
+{% endblock %}
+
+
+{% block hero %}
+    <section class="page-top-section set-bg" data-setbg="{% static 'img/header-bg/1.jpg' %}">
+		<div class="container">
+			<h2>{{ category.name }}</h2>
+		</div>
+	</section>
+{% endblock %}
+
+{% block content %}
+<div class="col-lg-8 blog-posts">
+	<div class="row">
+		{% for post in posts %}
+		<div class="col-md-6">
+			<div class="blog-post">
+				<img src="{{ post.image.url }}" alt="">
+				<div class="content-box">
+					<div>
+						<div class="post-date">{{ post.created_at|naturaltime}}</div>
+						<h4><a href="{{post.get_absolute_url}}" class="title-link">{{ post.title }}</a></h4>
+					</div>
+					<div class="post-metas">
+						<div class="post-meta">By {{post.author}}</div>
+						<div class="post-meta">in <a href="{{post.category.get_absolute_url}}">{{post.category}}</a></div>
+						<div class="post-meta">3 Comments</div>
+					</div>
+				</div>
+				<!--<p>{{ post.content|slice:":250" }}...</p>-->
+				<!--<a href="{{post.get_absolute_url }}" class="read-more">Read More</a>-->
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<div class="col-lg-4 sidebar">
+    <div class="sb-widget">
+		<div class="game-box">
+			<img src="{{ category.image.url }}" alt="">
+			<div class="content">
+			<h4 style="margin-bottom: 20px"><img src="{{category.icon.url}}" width="32" height="32" alt=""> {{category.name}}</h4>
+			<p>
+				<span class="color--gray-8a">Developer:</span> <span class="color--black-11">{{category.developer}}</span> <br>
+				<span class="color--gray-8a">Publisher:</span> <span class="color--black-11">{{category.publisher}}</span> <br>
+			</p>
+			<p>
+				<span class="color--gray-8a">Last version:</span> <span class="color--black-11">{{category.last_version}}</span> <br>
+				<span class="color--gray-8a">Website:</span> <span class="color--black-11"><a href="{{category.website}}" class="website-link" target="_blank">{{ category.name }}</a></span> <br>
+			</p>
+			<br>
+			<h5>Description</h5>
+			<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+			<p class="color--black-11">{{category.description|slice:":150"}}<span id="dots">...</span><span id="more">{{category.description|slice:"150:"}}</span><button onclick="myFunction()" id="myBtn" class="read-more-btn">Read more</button></p>
+			</div>
+		</div>
+    </div>
+</div>
+
+<script>
+	function myFunction() {
+	  var dots = document.getElementById("dots");
+	  var moreText = document.getElementById("more");
+	  var btnText = document.getElementById("myBtn");
+
+	  if (dots.style.display === "none") {
+		dots.style.display = "inline";
+		btnText.innerHTML = "Read more";
+		moreText.style.display = "none";
+	  } else {
+		dots.style.display = "none";
+		btnText.innerHTML = "Read less";
+		moreText.style.display = "inline";
+	  }
+	}
+</script>
+{% endblock %}
+
+{% block content_after %}
+{% endblock %}
