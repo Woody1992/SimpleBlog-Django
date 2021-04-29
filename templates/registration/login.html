@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block hero%}
+{% endblock %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+<script>
+    window.location.href = '{% url "blog:homepage" %}';
+</script>
+{% endif %}
+
+    <div style="display: flex; justify-content: center;">
+        <div style="border: 3px solid #10ddb4; padding: 100px 50px 50px; margin-top: 50px; width: 500px;border-radius: 20px;background-color: #6c757d;">
+        <h3 style="text-align: center;">Log in</h3>
+        <form action="{% url 'login' %}" method="post" style="margin-top: 50px;" class="account-form p-4 rounded">
+            {% csrf_token %}
+
+            {% if form.errors %}
+                <div class="alert alert-primary" role="alert">
+                    Error: Username or Password not correct!
+                </div>
+            {% endif %}
+
+            <label class="font-weight-bold">{{ form.username.label}}</label>
+            {{ form.username}}
+
+            <label class="font-weight-bold">{{ form.password.label}}</label>
+            {{ form.password}}
+
+            <button class="btn btn-dark btn-block py-2 mb-4 mt-5 font-weight-bold" type="submit" value="Log-in">Sign
+            in</button>
+
+            <p class="font-weight-bold text-center pb-3">
+            <a href="">New to Blog? Create an account</a>
+            </p>
+
+            <hr class="mb-3">
+            <p class="text-center">By signing in to your account, you agree to Blog <a href="">
+                Terms of Service</a> and consent to our <a href="">Cookie Policy</a> and <a href="">Privacy Policy</a>.
+                This site is not protected by reCAPTCHA and is a demonstration website for learning purposes only.
+            </p>
+        </form>
+            <p class="text-center pt-4">
+                <a href="{% url 'password_reset' %}">Forgotten Password?</a>
+            </p>
+            <p class="text-center">
+                <a href="">Help Center?</a>
+            </p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block sidebar%}
+{% endblock %}
+
+{% block content_after %}
+{% endblock %}

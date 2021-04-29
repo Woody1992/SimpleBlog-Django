@@ -35,7 +35,6 @@ class Tag(models.Model):
 
 
 class Post(models.Model):
-
     class NewManager(models.Manager):
         def get_queryset(self):
             return super().get_queryset().filter(status='published', main_post=False)
