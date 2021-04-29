@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block hero%}
+{% endblock %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+<script>
+    window.location.href = '{% url "accounts:profile" %}';
+</script>
+{% endif %}
+<div style="display: flex; justify-content: center;">
+        <div style="border: 3px solid #10ddb4; padding: 100px 50px 50px; margin-top: 50px; width: 500px;border-radius: 20px;background-color: #6c757d;">
+            <form class="account-form p-4 rounded col-lg-10 mx-auto" action="." method="post">
+                {% csrf_token %}
+                <p class="h4 mb-2 font-weight-bold">Create an account</p>
+
+                {% if form.errors %}
+                <p>Please correct the following errors:</p>
+                {% for field in form %}
+                {% if field.errors %}
+                <div class="alert alert-primary" role="alert">
+                    {{ field.label }}: {{ field.errors|striptags }}
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+
+                <label class="font-weight-bold">{{ form.username.label }}<span class="text-muted">
+                    (Required)</span></label>
+                {{ form.username }}
+                <label class="font-weight-bold">{{ form.email.label}}<span class="text-muted">
+                    (Required)</span></label>
+                {{ form.email }}
+                <label class="font-weight-bold">{{ form.password.label}}<span class="text-muted">
+                    (Required)</span></label>
+                {{ form.password }}
+                <small class="form-text mb-4">
+                    At least 8 characters and 1 digit
+                </small>
+                {{ form.password2 }}
+                <small class="form-text text-muted mb-4">
+                    Repeat password
+                </small>
+
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="Newsletter">
+                    <label class="custom-control-label" for="Newsletter">
+                        Subscribe to our newsletter</label>
+                </div>
+
+                <button class="btn btn-dark btn-block py-2 mb-4 mt-5 font-weight-bold"
+                        type="submit">Register</button>
+
+                <hr class="mb-3">
+                <p class="text-center">By clicking on register, you agree to Blog <a href="">Terms
+                    of
+                    Service</a> and
+                    consent to
+                    our <a href="">Cookie Policy</a> and <a href="">Privacy Policy</a>. This site is not
+                    protected
+                    by reCAPTCHA and
+                    is a demonstration website
+                    for learning purposes only.
+                </p>
+            </form>
+            <p class="text-center pt-4">
+                <a href="{% url 'accounts:login' %}">Already have an account?</a>
+            </p>
+            <p class="text-center">
+                <a href="#">Help Center?</a>
+            </p>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block sidebar%}
+{% endblock %}
+
+{% block content_after %}
+{% endblock %}

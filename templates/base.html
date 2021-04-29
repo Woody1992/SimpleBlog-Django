@@ -58,6 +58,7 @@
 			</li>
 		{% if user.is_authenticated %}
 			<li><a href="">{{ user.username|capfirst }}</a></li>
+			<li><a href="{% url 'logout' %}">Logout</a></li>
 		{% else %}
 			<li><a href="">Login</a></li>
 			<li><a href="">Register</a></li>
