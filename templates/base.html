@@ -60,8 +60,8 @@
 			<li><a href="">{{ user.username|capfirst }}</a></li>
 			<li><a href="{% url 'logout' %}">Logout</a></li>
 		{% else %}
-			<li><a href="">Login</a></li>
-			<li><a href="">Register</a></li>
+			<li><a href="{%url 'login' %}">Login</a></li>
+			<li><a href="{%url 'accounts:register'%}">Register</a></li>
 		{% endif %}
 		</ul>
 		<div id="results-box" class="results-card not-visible"></div>
